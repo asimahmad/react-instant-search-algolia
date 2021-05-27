@@ -1,4 +1,7 @@
 // import './App.css';
+
+
+// link of tutorial: https://stories.mlh.io/create-an-instant-search-experience-in-less-than-15-minutes-75655b8621a4
 import React, {Component} from 'react'
 import algoliasearch from 'algoliasearch/lite';
 import {InstantSearch, SearchBox, Hits, Highlight} from 'react-instantsearch-dom'
