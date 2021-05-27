@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// import './App.css';
+import React, {Component} from 'react'
+import algoliasearch from 'algoliasearch/lite';
+import {InstantSearch, SearchBox, Hits, Highlight} from 'react-instantsearch-dom'
 
+const searchClient = algoliasearch(
+  // 'latency',
+  // '3d9875e51fbd20c7754e65422f7ce5e1'
+);
+
+const Hit = ({hit}) =>    
+  <div className="hit">
+    <div className="hitImage">
+      <img src={hit.image} alt='img'/>
+    </div>
+      <div className = "hitName">
+        <Highlight attribute = "name" hit = {hit}/>
+      </div>
+  </div>
+
+const Content = () =>
+  <div className = "content">
+    <Hits hitComponent = {Hit}/>
+  </div>
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InstantSearch  searchClient={searchClient} indexName="bestbuy">
+        <header>
+          <SearchBox autoFocus translations={{placeholder: 'Search here...'}} />
+        </header>
+        <main>
+        <Content/>
+      </main>
+      </InstantSearch>
     </div>
   );
 }
